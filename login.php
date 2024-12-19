@@ -53,6 +53,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         <!-- Login Button -->
         <button type="submit">Log In</button>
+        <button type="submit" class="cancel-btn">Cancel</button>
+        <p>For a password hint view source and find a password hint in HTML comments.</p>
     </form>
 </body>
 </html>

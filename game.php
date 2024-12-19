@@ -2,13 +2,8 @@
 session_start();
 
 // Check if user is logged in
-if (!isset($_GET['name']) && !isset($_SESSION['name'])) {
-    die("Name parameter missing");
-}
-
-// Store the user's name in the session if it's not already stored
-if (isset($_GET['name']) && !isset($_SESSION['name'])) {
-    $_SESSION['name'] = $_GET['name'];
+if (!isset($_SESSION['name'])) {
+    die("Error: You need to log in first to access the game.");
 }
 
 // Function to check the result of the game
