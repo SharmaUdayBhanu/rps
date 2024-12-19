@@ -1,5 +1,4 @@
 <?php
-// game.php
 session_start();
 
 if (!isset($_SESSION['name'])) {
@@ -38,7 +37,7 @@ if (isset($_POST['human'])) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Play Game - Rock Paper Scissors - 28efcdfa</title> <!-- Title tag -->
+    <title>Play Game - Rock Paper Scissors</title> <!-- Title tag -->
 </head>
 <body>
     <h1>Welcome, <?= htmlentities($_SESSION['name']) ?>!</h1>
