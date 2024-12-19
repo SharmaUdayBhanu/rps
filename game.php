@@ -1,65 +1,82 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['name'])) {
-    die('Name parameter missing');
+// Check if user is logged in
+if (!isset($_GET['name']) && !isset($_SESSION['name'])) {
+    die("Name parameter missing");
 }
 
-$names = ['Rock', 'Paper', 'Scissors'];
-$result = '';
+// Store the user's name in the session if it's not already stored
+if (isset($_GET['name']) && !isset($_SESSION['name'])) {
+    $_SESSION['name'] = $_GET['name'];
+}
 
+// Function to check the result of the game
 function check($computer, $human) {
     if ($computer == $human) {
-        return 'Tie';
+        return "Tie";
     }
-    if (($human == 0 && $computer == 2) || ($human == 1 && $computer == 0) || ($human == 2 && $computer == 1)) {
-        return 'You Win';
-    }
-    return 'You Lose';
-}
-
-if (isset($_POST['logout'])) {
-    session_destroy();
-    header('Location: index.php');
-    exit();
-}
-
-if (isset($_POST['human'])) {
-    $human = $_POST['human'];
-    if ($human >= 0 && $human <= 2) { // Validate to ensure it's a valid selection
-        $computer = rand(0, 2);
-        $result = check($computer, $human);
+    
+    // 0 - Rock, 1 - Paper, 2 - Scissors
+    if (($human == 0 && $computer == 2) || 
+        ($human == 1 && $computer == 0) || 
+        ($human == 2 && $computer == 1)) {
+        return "You Win";
     } else {
-        $result = 'Invalid selection';
+        return "You Lose";
+    }
+}
+
+$names = array("Rock", "Paper", "Scissors");
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if ($_POST['play'] == 'Play') {
+        $human = $_POST['choice'];
+        $computer = rand(0, 2);  // Computer selects randomly between 0, 1, 2
+        $result = check($computer, $human);
+        
+        // Display the result
+        echo "Your Play=" . $names[$human] . " Computer Play=" . $names[$computer] . " Result=" . $result;
+    } elseif ($_POST['play'] == 'Logout') {
+        session_destroy();
+        header('Location: index.php');
+        exit;
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Play Game - Rock Paper Scissors</title> <!-- Title tag -->
+    <title>Rock Paper Scissors - Game</title>
 </head>
 <body>
-    <h1>Welcome, <?= htmlentities($_SESSION['name']) ?>!</h1>
+    <h2>Welcome <?php echo htmlspecialchars($_SESSION['name']); ?>! Play Rock Paper Scissors</h2>
     <form method="POST">
-        <label for="human">Choose Your Move:</label>
-        <select name="human" id="human">
+        <label for="choice">Choose:</label>
+        <select name="choice" id="choice">
             <option value="0">Rock</option>
             <option value="1">Paper</option>
             <option value="2">Scissors</option>
         </select>
-        <input type="submit" value="Play">
-        <input type="submit" name="logout" value="Logout">
+        <br><br>
+        <button type="submit" name="play" value="Play">Play</button>
+        <button type="submit" name="play" value="Logout">Logout</button>
+    </form>
+    
+    <!-- Test functionality -->
+    <form method="POST">
+        <button type="submit" name="play" value="Test">Test</button>
     </form>
 
     <?php
-    if (isset($_POST['human']) && isset($human)) {
-        if ($human >= 0 && $human <= 2) {
-            echo "Your Play: " . $names[$human] . "<br>";
-            echo "Computer Play: " . $names[$computer] . "<br>";
-            echo "Result: " . $result . "<br>";
-        } else {
-            echo "Please select a valid option.";
+    // Test all combinations
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['play'] == "Test") {
+        for ($c = 0; $c < 3; $c++) {
+            for ($h = 0; $h < 3; $h++) {
+                $r = check($c, $h);
+                echo "Human=" . $names[$h] . " Computer=" . $names[$c] . " Result=" . $r . "<br>";
+            }
         }
     }
     ?>
