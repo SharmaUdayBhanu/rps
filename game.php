@@ -51,7 +51,7 @@ $result = check($computer, $human);
 <!DOCTYPE html>
 <html>
 <head>
-<title>Lester Cardoz - Rock, Paper, Scissors Game</title>
+<title>28efcdfa - Rock, Paper, Scissors Game</title>
 <?php require_once "bootstrap.php"; ?>
 </head>
 <body>
