@@ -43,10 +43,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>28efcdfa</title>
+    <title>Rock Paper Scissors</title>
 </head>
 <body>
     <h2>Welcome <?php echo htmlspecialchars($_SESSION['name']); ?>! Play Rock Paper Scissors</h2>
+    
+    <!-- Display instructions and buttons -->
+    <p>Please select a strategy and press Play.</p>
+
     <form method="POST">
         <label for="choice">Choose:</label>
         <select name="choice" id="choice">
@@ -55,6 +59,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <option value="2">Scissors</option>
         </select>
         <br><br>
+        
+        <!-- Play and Logout Buttons -->
         <button type="submit" name="play" value="Play">Play</button>
         <button type="submit" name="play" value="Logout">Logout</button>
     </form>
