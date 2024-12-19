@@ -1,5 +1,5 @@
 <?php
-// Set a flag for error message
+session_start();
 $error_message = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -18,8 +18,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($check_hash != $stored_hash) {
             $error_message = 'Incorrect password';
         } else {
-            // Redirect to game.php with the user's name as GET parameter
-            header("Location: game.php?name=" . urlencode($_POST['who']));
+            // Set the session variable and redirect
+            $_SESSION['name'] = $_POST['who'];
+            header("Location: game.php"); // Redirect to game page
             exit;
         }
     }
@@ -32,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>28efcdfa</title>
 </head>
 <body>
-    <h2><a href="login.php">Please Log In</a></h2>
+    <h2>Please Log In</h2>
     <form method="POST">
         <!-- Username Field -->
         <label for="who">Username:</label>

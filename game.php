@@ -33,8 +33,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Display the result
         echo "Your Play=" . $names[$human] . " Computer Play=" . $names[$computer] . " Result=" . $result;
     } elseif ($_POST['play'] == 'Logout') {
-        session_destroy();
-        header('Location: index.php');
+        session_destroy(); // Destroy the session
+        header('Location: login.php'); // Redirect to login page after logout
         exit;
     }
 }
@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Rock Paper Scissors</title>
+    <title>Rock Paper Scissors 28efcdfa</title>
 </head>
 <body>
     <h2>Welcome <?php echo htmlspecialchars($_SESSION['name']); ?>! Play Rock Paper Scissors</h2>
