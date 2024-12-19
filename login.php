@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Rock Paper Scissors - Login</title>
+    <title>28efcdfa</title>
 </head>
 <body>
     <h2><a href="login.php">Please Log In</a></h2>
