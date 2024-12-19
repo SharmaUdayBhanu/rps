@@ -46,13 +46,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Rock Paper Scissors 28efcdfa</title>
 </head>
 <body>
-    <h2>Welcome <?php echo htmlspecialchars($_SESSION['name']); ?>! Play Rock Paper Scissors</h2>
+    <h2>Rock Paper Scissors</h2>
     
     <!-- Display instructions and buttons -->
+     <p>Welcome: <?php echo htmlspecialchars($_SESSION['name']); ?></p>
     <p>Please select a strategy and press Play.</p>
 
     <form method="POST">
-        <label for="choice">Choose:</label>
         <select name="choice" id="choice">
             <option value="0">Rock</option>
             <option value="1">Paper</option>
@@ -64,22 +64,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <button type="submit" name="play" value="Play">Play</button>
         <button type="submit" name="play" value="Logout">Logout</button>
     </form>
-    
-    <!-- Test functionality -->
-    <form method="POST">
-        <button type="submit" name="play" value="Test">Test</button>
-    </form>
 
-    <?php
-    // Test all combinations
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['play'] == "Test") {
-        for ($c = 0; $c < 3; $c++) {
-            for ($h = 0; $h < 3; $h++) {
-                $r = check($c, $h);
-                echo "Human=" . $names[$h] . " Computer=" . $names[$c] . " Result=" . $r . "<br>";
-            }
-        }
-    }
-    ?>
 </body>
 </html>

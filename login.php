@@ -36,21 +36,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <h2>Please Log In</h2>
     <form method="POST">
         <!-- Username Field -->
-        <label for="who">Username:</label>
-        <input type="text" name="who" id="who" value="">
-        <br><br>
-        
-        <!-- Password Field -->
-        <label for="pass">Password:</label>
-        <input type="password" name="pass" id="pass" value="">
-        <br><br>
-        
-        <!-- Error Message Display -->
         <?php
         if ($error_message) {
             echo '<p style="color:red;">' . $error_message . '</p>';
         }
         ?>
+        <label for="who">Username:</label>
+        <input type="text" name="who" id="who" value="">
+        <br>
+        
+        <!-- Password Field -->
+        <label for="pass">Password:</label>
+        <input type="password" name="pass" id="pass" value="">
+        <br>
+        
+        <!-- Error Message Display -->
+
         
         <!-- Login Button -->
         <button type="submit">Log In</button>
